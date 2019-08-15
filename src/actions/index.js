@@ -1,5 +1,5 @@
-function actions(resultado) {
-  return { type: "SHOW_CALCULA", resultado: resultado };
+function actions(funcao, resultado) {
+  return { type: funcao, resultado: resultado };
 }
 
 export default actions;

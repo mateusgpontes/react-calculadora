@@ -1,12 +1,12 @@
 import React from "react";
-import Calcula from "./components/Calcula/";
+import Calculate from "./components/Calculate/";
 import { Provider } from "react-redux";
 import store from "./store";
 
 function App() {
   return (
     <Provider store={store}>
-      <Calcula />
+      <Calculate />
     </Provider>
   );
 }

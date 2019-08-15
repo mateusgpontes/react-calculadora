@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import actions from "../../actions/";
+import actions from "../../actions";
 
-const Calcula = () => {
+const Calculator = () => {
   const resulte = useSelector(state => {
     return state;
   });
 
   const [first, setFirst] = useState(undefined);
-  const [operator, setOperator] = useState(undefined);
+  const [operation, setOperation] = useState(undefined);
   const [two, setTwo] = useState(undefined);
 
   const dispatch = useDispatch();
 
-  function showCacula(cal) {
-    dispatch(actions(cal));
-  }
-
   function calculaParams() {
-    switch (operator) {
+    switch (operation) {
       case "+":
         return Number(first) + Number(two);
       case "-":
@@ -27,6 +23,8 @@ const Calcula = () => {
         return Number(first) * Number(two);
       case "/":
         return Number(first) / Number(two);
+      case "%":
+        return (Number(first) * 100) / Number(two);
       default:
         return null;
     }
@@ -36,6 +34,7 @@ const Calcula = () => {
     <div>
       <h1>Calculadora</h1>
       <input
+        type="Number"
         placeholder="Primeiro valor"
         onChange={e => {
           setFirst(e.target.value);
@@ -44,10 +43,11 @@ const Calcula = () => {
       <input
         placeholder="Qual operação"
         onChange={e => {
-          setOperator(e.target.value);
+          setOperation(e.target.value);
         }}
       />
       <input
+        type="Number"
         placeholder="Segundo valor"
         onChange={e => {
           setTwo(e.target.value);
@@ -55,18 +55,23 @@ const Calcula = () => {
       />
       <button
         onClick={() => {
-          showCacula(calculaParams());
+          dispatch(actions("SHOW_RESULTADO", calculaParams()));
         }}
       >
         Calcular
       </button>
       <ul>
         {resulte.map((res, i) => {
-          return <li key={i}>Resposta:{res.data}</li>;
+          return (
+            <li key={i}>
+              Resposta:
+              {res.data}
+            </li>
+          );
         })}
       </ul>
     </div>
   );
 };
 
-export default Calcula;
+export default Calculator;
