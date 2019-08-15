@@ -1,9 +1,14 @@
 import React from "react";
+import Calcula from "./components/Calcula";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
   return (
     <div className="App">
-      <h1>Hey listen</h1>
+      <Provider store={store}>
+        <Calcula />
+      </Provider>
     </div>
   );
 }
